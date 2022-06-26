@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import logo from "~/assets/logo.svg";
 import { onMounted, Ref, ref } from "vue";
 import { AuthStatus, useAuthStore } from "~/stores/auth";
 import { useRoute, useRouter } from "vue-router";
@@ -11,9 +10,7 @@ const route = useRoute();
 const login = async () => {
   await authStore.loginWith(username.value, password.value);
   await router.push(
-    route.query["redirectTo"]
-      ? (route.query["redirectTo"] as string)
-      : "/backstage/pages/home"
+    route.query["redirectTo"] ? (route.query["redirectTo"] as string) : "/pages/home"
   );
 };
 
@@ -22,9 +19,7 @@ const redirectIfLoggedIn = async () => {
   if (authState == AuthStatus.UNAUTHED) return;
   if (authState == AuthStatus.TIMEOUT) await authStore.refreshToken();
   await router.push(
-    route.query["redirectTo"]
-      ? (route.query["redirectTo"] as string)
-      : "/backstage/pages/home"
+    route.query["redirectTo"] ? (route.query["redirectTo"] as string) : "/pages/home"
   );
 };
 
@@ -36,7 +31,7 @@ const username: Ref<string> = ref("");
 const password: Ref<string> = ref("");
 
 onMounted(() => {
-  username.value = "admin@example.com";
+  username.value = "admin";
   password.value = "admin";
 });
 </script>

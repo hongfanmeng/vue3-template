@@ -5,7 +5,7 @@ import { onMounted } from "vue";
 const router = useRouter();
 
 const redirect = async () => {
-  await router.push("/backstage/login");
+  await router.push("/login");
 };
 
 onMounted(() => {
